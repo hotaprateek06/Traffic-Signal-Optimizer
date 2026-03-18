@@ -1,0 +1,217 @@
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Background */
+.app {
+  padding: 20px;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: white;
+}
+
+/* Title */
+.title {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 28px;
+  letter-spacing: 1px;
+}
+
+/* Layout FIXED */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+/* LEFT PANEL */
+.left {
+  max-width: 420px;
+  width: 100%;
+  background: rgba(255,255,255,0.1);
+  padding: 25px;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+/* RIGHT PANEL */
+.right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Inputs */
+.inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+input {
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  transition: 0.3s;
+}
+
+input:focus {
+  transform: scale(1.05);
+}
+
+/* Buttons */
+.buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+button {
+  flex: 1;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  background: #00c6ff;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #0072ff;
+  color: white;
+  transform: scale(1.05);
+}
+
+/* Timer */
+h3 {
+  margin-top: 15px;
+}
+
+/* Result */
+.result {
+  margin-top: 15px;
+  background: rgba(0,0,0,0.3);
+  padding: 15px;
+  border-radius: 10px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+/* Intersection */
+.intersection {
+  position: relative;
+  width: 320px;
+  height: 320px;
+  background: #222;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+
+/* Roads */
+.road {
+  position: absolute;
+  background: #444;
+}
+
+.vertical {
+  width: 70px;
+  height: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.horizontal {
+  height: 70px;
+  width: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Signals */
+.signal {
+  position: absolute;
+}
+
+.A { top: 10px; left: 50%; transform: translateX(-50%); }
+.B { right: 10px; top: 50%; transform: translateY(-50%); }
+.C { bottom: 10px; left: 50%; transform: translateX(-50%); }
+.D { left: 10px; top: 50%; transform: translateY(-50%); }
+
+.light {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: red;
+  transition: 0.3s;
+}
+
+.light.green {
+  background: #00ff88;
+  box-shadow: 0 0 15px #00ff88;
+}
+
+/* Animations */
+@keyframes moveA {
+  from { top: 0; left: 50%; }
+  to { top: 160px; left: 50%; }
+}
+
+@keyframes moveB {
+  from { right: 0; top: 50%; }
+  to { right: 160px; top: 50%; }
+}
+
+@keyframes moveC {
+  from { bottom: 0; left: 50%; }
+  to { bottom: 160px; left: 50%; }
+}
+
+@keyframes moveD {
+  from { left: 0; top: 50%; }
+  to { left: 160px; top: 50%; }
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .intersection {
+    width: 260px;
+    height: 260px;
+  }
+
+  .vertical {
+    width: 50px;
+  }
+
+  .horizontal {
+    height: 50px;
+  }
+}
