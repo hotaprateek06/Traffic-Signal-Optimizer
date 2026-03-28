@@ -149,10 +149,11 @@ h3 {
   position: absolute;
 }
 
-.A { top: 10px; left: 50%; transform: translateX(-50%); }
-.B { right: 10px; top: 50%; transform: translateY(-50%); }
-.C { bottom: 10px; left: 50%; transform: translateX(-50%); }
-.D { left: 10px; top: 50%; transform: translateY(-50%); }
+/* FINAL CORRECT MAPPING */
+.A { top: 10px; left: 50%; transform: translateX(-50%); }      /* Top */
+.B { right: 10px; top: 50%; transform: translateY(-50%); }     /* Right */
+.C { bottom: 10px; left: 50%; transform: translateX(-50%); }   /* Bottom */
+.D { left: 10px; top: 50%; transform: translateY(-50%); }      /* Left */
 
 .light {
   width: 22px;
@@ -214,4 +215,40 @@ h3 {
   .horizontal {
     height: 50px;
   }
+}
+/* Road Labels FIXED BELOW LIGHT */
+.road-label {
+  position: absolute;
+  color: white;
+  font-size: 13px;
+  font-weight: bold;
+  background: rgba(0,0,0,0.7);
+  padding: 3px 6px;
+  border-radius: 6px;
+  z-index: 10; /* above everything */
+}
+
+/* Positions BELOW lights */
+.labelA {
+  top: 35px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.labelB {
+  right: 35px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.labelC {
+  bottom: 35px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.labelD {
+  left: 35px;
+  top: 50%;
+  transform: translateY(-50%);
 }

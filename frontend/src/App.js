@@ -23,19 +23,16 @@ function App() {
   const intervalRef = useRef(null);
   const indexRef = useRef(0);
 
-  // Input
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
 
-  // 🚑 Emergency priority
   const handleEmergency = (road) => {
     setEmergency(road);
-
     clearInterval(intervalRef.current);
 
     setActiveRoad(road);
-    setTimer(10); // fixed emergency time
+    setTimer(10);
 
     let t = 10;
 
@@ -51,11 +48,10 @@ function App() {
     }, 1000);
   };
 
-  // Start simulation
   const startSimulation = () => {
     const roads = ["A", "B", "C", "D"];
 
-    const sorted = roads.sort(
+    const sorted = [...roads].sort(
       (r1, r2) => (data[r2] || 0) - (data[r1] || 0)
     );
 
@@ -82,9 +78,8 @@ function App() {
     runCycle();
   };
 
-  // Core logic
   const runCycle = () => {
-    if (emergency) return;
+    if (emergency || queue.length === 0) return;
 
     const road = queue[indexRef.current];
     const vehicles = Number(data[road]) || 0;
@@ -95,6 +90,8 @@ function App() {
     setTimer(greenTime);
 
     let t = greenTime;
+
+    clearInterval(intervalRef.current);
 
     intervalRef.current = setInterval(() => {
       t--;
@@ -112,18 +109,19 @@ function App() {
   };
 
   useEffect(() => {
-    if (running && !paused && queue.length > 0) {
-      runCycle();
-    }
+  if (running && !paused && queue.length > 0) {
+    runCycle();
+  }
 
-    return () => clearInterval(intervalRef.current);
-  }, [running]);
+  return () => clearInterval(intervalRef.current);
 
-  // 📄 Generate report
+// eslint-disable-next-line
+}, [running, paused, queue.length]);
+
   const generateReport = () => {
     const roads = ["A", "B", "C", "D"];
 
-    const sorted = roads.sort(
+    const sorted = [...roads].sort(
       (r1, r2) => (data[r2] || 0) - (data[r1] || 0)
     );
 
@@ -143,24 +141,24 @@ function App() {
   };
 
   const downloadPDF = () => {
-  const doc = new jsPDF();
+    const doc = new jsPDF();
 
-  doc.setFontSize(16);
-  doc.text("Traffic Signal Optimization Report", 20, 20);
+    doc.setFontSize(16);
+    doc.text("Traffic Signal Optimization Report", 20, 20);
 
-  doc.setFontSize(12);
+    doc.setFontSize(12);
 
-  let y = 30;
+    let y = 30;
 
-  const lines = report.split("\n");
+    const lines = report.split("\n");
 
-  lines.forEach((line) => {
-    doc.text(line, 20, y);
-    y += 7;
-  });
+    lines.forEach((line) => {
+      doc.text(line, 20, y);
+      y += 7;
+    });
 
-  doc.save("Traffic_Report.pdf");
-};
+    doc.save("Traffic_Report.pdf");
+  };
 
   return (
     <div className="app">
@@ -183,7 +181,6 @@ function App() {
                   onChange={handleChange}
                 />
 
-                {/* Emergency Button */}
                 <button
                   onClick={() => handleEmergency(road)}
                   style={{ marginTop: "5px", background: "red", color: "white" }}
@@ -218,6 +215,12 @@ function App() {
 
             <div className="road vertical"></div>
             <div className="road horizontal"></div>
+
+            {/* ROAD LABELS 🔥 */}
+            <div className="road-label labelA">A</div>
+            <div className="road-label labelB">B</div>
+            <div className="road-label labelC">C</div>
+            <div className="road-label labelD">D</div>
 
             {["A","B","C","D"].map((r) => (
               <div key={r} className={`signal ${r}`}>
